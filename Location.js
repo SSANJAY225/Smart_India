@@ -26,7 +26,7 @@ const stopSchema = new mongoose.Schema({
     latitude: Number,
     longitude: Number,
     NoOfpassenger: Number
-}, { collection: 'Stops' });
+}, { collection: 'stops' });
 
 const busDataSchema = new mongoose.Schema({
     busid: Number,
@@ -40,8 +40,9 @@ const busDataSchema = new mongoose.Schema({
     currentseatcountfilled: Number,
 }, { collection: 'busdata' });
 
-const Stop = mongoose.model('Stops', stopSchema);
+const Stop = mongoose.model('stops', stopSchema);
 const BusData = mongoose.model('BusData', busDataSchema);
+
 
 // Haversine formula to calculate the distance between two points on the Earth's surface
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -59,18 +60,19 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // Route to find the minimum distance between any bus and stop with the same route
 app.get('/min-distance', async (req, res) => {
     try {
+        let min = [];
         const stops = await Stop.find();
-console.log("Fetched Stops:", stops[1]);
+        console.log("Fetched Stops:", stops[1]);
         // const stops = await Stop.find();
         const buses = await BusData.find();
 
         // Debugging: Log the fetched data
-        console.log("Stops:", stops);
+        console.log("Stops:", stops.length);
         console.log("Buses:", buses.length);
 
-        // if (stops.length === 0 || buses.length === 0) {
-        //     return res.status(404).json({ message: "No stops or bus data available" });
-        // }
+        if (stops.length === 0 || buses.length === 0) {
+            return res.status(404).json({ message: "No stops or bus data available" });
+        }
 
         let minDistance = Infinity;
         let closestPair = null;
@@ -105,9 +107,11 @@ console.log("Fetched Stops:", stops[1]);
                             },
                             distance: minDistance
                         };
+                        min.push(closestPair)
                     }
                 }
             }
+            
         }
         closestPair={
             bus:{
@@ -125,21 +129,22 @@ console.log("Fetched Stops:", stops[1]);
                     longitude: 80.213593
                     }
             }}
-            let min = [];
             min.push(closestPair)
+           
+            
         
-        // if (!closestPair) {
-        //     return res.status(404).json({ message: "No matching bus and stop pairs found" });
-        // }
+        if (!min) {
+            return res.status(404).json({ message: "No matching bus and stop pairs found" });
+        }
         // Map the result to include bus ID and minimum distance
-        const result = {
-            busid: closestPair.bus.busid,
-            stop: closestPair.stop,
-            distance: closestPair.distance
-        };
+        // const result = {
+        //     busid: closestPair.bus.busid,
+        //     stop: closestPair.stop,
+        //     distance: closestPair.distance
+        // };
 
         // Send the result as the response
-        res.json(closestPair);
+        res.json(min);
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: err.message });
