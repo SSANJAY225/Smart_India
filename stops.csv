@@ -1,0 +1,69 @@
+Route[0],Route[1],Route[2],StopName,latitude,longitude,NoOfpassenger
+1,2,3,Thiruvanmiyur,12.9830269,80.2594001,10
+2,,,Thoraipakkam,12.939266,80.234695,11
+2,,,Karapakkam,12.91417,80.22938,12
+2,,,Sholinganallur,12.9009877,80.2279301,13
+2,,,Navalur,12.8585,80.03766,14
+3,,,Velacheri,12.97598,80.2212002,15
+3,,,Ram Nagar,12.967918,80.195527,16
+3,,,Madipakkam,12.96226,80.19864,17
+3,,,Medavakkam,12.917143,80.192352,18
+1,,,Adyar,13.003387,80.255043,19
+1,,,Guindy,13.010236,80.215652,20
+1,,,Ashok Nagar,13.038321,80.213593,21
+1,,,vadapalani,13.052192,80.212051,22
+1,,,koyambedu,13.0666664,80.1999992,23
+1,,,Kamaraj Nagar,12.9855131,80.2565256,10
+1,,, Pallipattu,13.0035951,80.2453748,12
+1,,, Sriram Nagar,13.0053873,80.2457233,14
+1,,,Sardar Patel Rd,13.0083836,80.2321698,16
+1,,,Guindy National Park,13.0037019,80.229343,18
+1,,,Little Mount,13.0167754,80.2269031,20
+1,,,Race View Colony,13.0066013,80.2119136,22
+1,,,SIDCO Industrial Estate,13.0144557,80.2126109,24
+1,,,Kalaimagal Nagar,13.0263166,80.2063355,26
+1,,,Bharathidasan Colony,13.0330385,80.2052895,28
+1,,,Sarvamangala Colony,13.0420283,80.20773,30
+1,,,Vadapalani,13.0499711,80.2121306,32
+1,,,Dharan Singh Colony,13.0534708,80.2091246,34
+1,,,Thiru Nagar Colony,13.0563713,80.2105191,36
+1,,,Annai Sathya Nagar,13.064123,80.2084273,38
+1,,,Brundavan Nagar,13.0643842,80.1965728,40
+1,,,Wholesale Market Complex,13.0671789,80.1951781,42
+1,,,Nerkundram,13.0678391,80.1859183,44
+1,,,Koyambedu,13.0739183,80.1907184,46
+2,,," SH 49, Vasudeva Nagar Extension",12.9828357,80.2594897,10
+2,,,  Valmiki Nagar,12.9775201,80.2638245,11
+2,,, New Colony,12.9685416,80.2593131,12
+2,,,Palavakkam,12.9616562,80.256219,13
+2,,, Neelankarai,12.9492127,80.2546826,14
+2,,,Raja Nagar,12.9424063,80.2547834,15
+2,,,Teachers Colony,12.9388238,80.2540865,16
+2,,,Hanuman Colony,12.9297634,80.2495566,17
+2,,,Cholamandal Artists Village,12.9235976,80.2558288,18
+2,,, Injambakkam,12.9197836,80.2511237,19
+2,,,Akkarai,12.9025794,80.2464401,20
+2,,,Akkarai,12.9025794,80.2464401,21
+2,,,KTK Town,12.89898,80.2345711,22
+2,,,Ezhil Nagar,12.8993665,80.2300146,23
+2,,, Rajiv Gandhi Salai,12.8970434,80.2277645,24
+2,,,Sholinganallur,12.9009877,80.2279301,25
+2,,,"TNHB, Sholinganallur",12.885788,80.2335255,26
+2,,,Semmancheri,12.8601432,80.2272254,27
+2,,,Navalur,12.8459348,80.2265229,28
+3,,,Lakshmi Vadhana St,12.9835706,80.2549054,20
+3,,,Dr. Vasi Estate,12.9792424,80.250602,21
+3,,,Perungudi,12.9862535,80.2457295,22
+3,,,Bharathi Nagar,12.9790342,80.2356167,23
+3,,,Taramani Link Rd,12.980211,80.2282796,24
+3,,,Sarathy Nagar,12.9757155,80.2230688,25
+3,,,Velachery Main Rd,12.9647555,80.216564,26
+3,,,Pallikaranai Marshland,12.9755397,80.2206438,27
+3,,, Ma Po Si Nagar,12.9447862,80.2140053,28
+3,,, Velachery Main Rd,12.9514111,80.211078,29
+3,,,Velachery - Tambaram High Road,12.9341029,80.2039741,30
+3,,,Pallikaranai Marshland,12.9348912,80.2137124,31
+3,,," Velachery - Tambaram Main Rd, Green Court",12.9232703,80.1605342,32
+3,,,Jalladianpet,12.9178174,80.1965728,33
+3,,,"Perumbakkam Main Rd, Green Court",12.9075441,80.2027355,34
+3,,,Medavakkam,12.9200089,80.1919901,35

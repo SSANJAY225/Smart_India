@@ -78,7 +78,7 @@ app.get('/min-distance', async (req, res) => {
                 }
 
                 if (!bus || !bus.location || !bus.location.latitude || !bus.location.longitude) {
-                    console.error("Invalid bus location data: ", bu);
+                    console.error("Invalid bus location data: ", bus);
                     break;
                 }
                 if (stop.Route.includes(bus.routeno) && !bus.status && bus.currentseatcountfilled + stop.NoOfpassenger <= bus.staticseatcount) {
