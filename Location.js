@@ -49,9 +49,9 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; // Radius of the Earth in kilometers
     const dLat = (lat2 - lat1) * (Math.PI / 180);
     const dLon = (lon2 - lon1) * (Math.PI / 180);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; 
+    const distance = R * c;
     return distance;
 }
 
@@ -68,32 +68,31 @@ app.get('/min-distance', async (req, res) => {
 
         var minDistance = Infinity;
         let closestPair = null;
-        const bu=buses[0]
         for (const bus of buses) {
-        closestPair=null
+            closestPair = null
+            minDistance = Infinity
             for (const stop of stops) {
                 if (!stop.latitude || !stop.longitude) {
                     console.error("Invalid stop data: ", stop);
-                    continue; 
+                    continue;
                 }
-        
+
                 if (!bus || !bus.location || !bus.location.latitude || !bus.location.longitude) {
                     console.error("Invalid bus location data: ", bu);
-                    break; 
+                    break;
                 }
-                if (stop.Route.includes(bus.routeno) && !bus.status && bus.currentseatcountfilled+stop.NoOfpassenger<=bus.staticseatcount) {
+                if (stop.Route.includes(bus.routeno) && !bus.status && bus.currentseatcountfilled + stop.NoOfpassenger <= bus.staticseatcount) {
                     const distance = calculateDistance(
                         bus.location.latitude,
                         bus.location.longitude,
                         stop.latitude,
                         stop.longitude
                     );
-                
+
                     if (isNaN(distance)) {
                         console.error("Distance calculation failed:", distance);
                         continue; // Skip iteration if distance calculation failed
                     }
-
                     if (distance < minDistance) {
                         minDistance = distance;
                         closestPair = {
@@ -111,14 +110,14 @@ app.get('/min-distance', async (req, res) => {
                             },
                             distance: minDistance
                         };
-                       
+
                     }
-                }                
+                }
             }
-            if(closestPair)
+            if (closestPair)
                 min.push(closestPair)
         }
-        if (!min) 
+        if (!min)
             return res.status(404).json({ message: "No matching bus and stop pairs found" });
         else
             res.json(min);
