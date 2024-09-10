@@ -76,7 +76,7 @@ app.post("/counter", async (req, res) => {
                 console.log(err);
                 return res.status(500).send("Error generating QR code");
             }
-            res.json({ id: savedTicket._id, qrCode: url });
+            res.json({qrCode: url });
         });
     }
     catch (e) {
@@ -98,7 +98,7 @@ app.post("/verify", async (req, res) => {
             return res.json("Not Ticket");
         }
         const count = await Ticket.findById(matchedTicket)
-        console.log(count.__v);
+        // console.log(count.__v);
         if (count.__v == 0) {
             await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 1 } }, { new: true })
             return res.json("Passenger Boarded")

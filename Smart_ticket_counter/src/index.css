@@ -1,0 +1,205 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+form
+{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.srcbox
+{
+  display: flex;
+  gap: 20px;
+
+}
+.stopname
+{
+  padding: 30px;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  background-color: green;
+
+}
+
+.dashbut
+{
+  color: white;
+  background-color: rgb(5, 5, 110);
+  padding: 20px;
+  border-radius: 20px5;
+
+}
+
+.buttonshome
+{
+  display: flex;
+  gap: 20px;
+}
+.stopname:hover
+{
+  background-color: rgb(10, 224, 10);
+  transition: ease-in 400ms;
+}
+.map
+{
+  
+}
+iframe
+{
+  height: 300px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.routebox
+{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(7, 7, 134);
+}
+.routes
+{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.descbox
+{
+  display: flex;
+  gap: 20px;
+}
+
+.stopname2
+{
+  padding: 30px;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 109, 128);
+}
+
+.stopname2:hover
+{
+  background-color: rgb(141, 5, 5);
+  transition: ease-in 200ms;
+}
+
+button{
+  margin: 50px;
+  background-color: green;
+  color: white;
+}
+
+button:hover
+{
+  background-color: red;
+  color: black;
+}
+
+.dashcont
+{
+  display: flex;
+  gap: 20px;
+  
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0px 0px   10px  white;
+}
+
+.busbox
+{
+  
+  padding: 20px;
+  border-radius: 20px;
+  background-color: white;
+  color: black;
+}
+
+.busbox iframe
+{
+  height: 300px;
+  width: 300px;
+}
+
+.busstat
+{
+  background-color: rgb(4, 4, 116);
+  border-radius: 30px;
+  color: white;
+}
+
+.busbox p{
+  background-color: red;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
