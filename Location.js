@@ -1,10 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
+const crypto = require('crypto');
+const qrcode = require('qrcode-terminal');
+const QRCode = require('qrcode');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // Database connection
 mongoose.connect("mongodb+srv://Dheena:dheena123@cluster0.ser6ewc.mongodb.net/Smarttransit?retryWrites=true&w=majority&appName=Cluster0", {
@@ -39,19 +44,84 @@ const busDataSchema = new mongoose.Schema({
     staticseatcount: Number,
     currentseatcountfilled: Number,
 }, { collection: 'busdata' });
+const ticketSchema = new mongoose.Schema({
+    source: String,
+    destination: String,
+    email: String,
+    routeno: Number
+});
 
+const Ticket = mongoose.model('Ticket', ticketSchema);
 const Stop = mongoose.model('stops', stopSchema);
 const BusData = mongoose.model('BusData', busDataSchema);
 
+function swap(str) {
+    let arr = str.split('');
+        for (let i = 0; i < arr.length - 1; i += 2) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+    }    
+    return arr.join('');
+}
+// Adding ticket
+app.post("/counter", async (req, res) => {
+    try {
+        const { source, destination, email, routeno } = req.body;
+        const ticket = new Ticket({ source, destination, email, routeno });
+        const savedTicket = await ticket.save();
+        // res.send({ id: savedTicket._id });
+        console.log()
+        const hashedDetails = crypto.createHash('sha256').update(swap(savedTicket._id.toString())).digest('hex');
+        QRCode.toDataURL(hashedDetails, { errorCorrectionLevel: 'H' }, (err, url) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Error generating QR code");
+            }
+            res.json({ id: savedTicket._id, qrCode: url });
+        });
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).send("Error creating ticket");
+    }
+});
+
+// verify the passenger before travel
+app.post("/verify", async (req, res) => {
+    try {
+        const { hashedId } = req.body;
+        const tickets = await Ticket.find();
+        const matchedTicket = tickets.find(ticket => {
+            const ticketHash = crypto.createHash('sha256').update(swap(ticket._id.toString())).digest('hex');
+            return ticketHash === hashedId;
+        });
+        if (!matchedTicket) {
+            return res.json("Not Ticket");
+        }
+        const count = await Ticket.findById(matchedTicket)
+        console.log(count.__v);
+        if (count.__v == 0) {
+            await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 1 } }, { new: true })
+            return res.json("Passenger Boarded")
+        }
+        else if (count.__v == 1) {
+            await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 2 } }, { new: true });
+            return res.json("Travel completed")
+        } else {
+            return res.json("Ticket already used")
+        }
+    } catch (error) {
+        console.error("Error during verification:", error);
+        res.status(500).send("Verification failed");
+    }
+});
 
 // Haversine formula to calculate the distance between two points on the Earth's surface
 function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Radius of the Earth in kilometers
     const dLat = (lat2 - lat1) * (Math.PI / 180);
     const dLon = (lon2 - lon1) * (Math.PI / 180);
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
+    const distance = 6371 * c;
     return distance;
 }
 
@@ -91,7 +161,7 @@ app.get('/min-distance', async (req, res) => {
 
                     if (isNaN(distance)) {
                         console.error("Distance calculation failed:", distance);
-                        continue; // Skip iteration if distance calculation failed
+                        continue;
                     }
                     if (distance < minDistance) {
                         minDistance = distance;

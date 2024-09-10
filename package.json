@@ -1,7 +1,12 @@
 {
   "dependencies": {
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.19.2",
-    "mongoose": "^8.6.1"
+    "jimp": "^1.6.0",
+    "mongoose": "^8.6.1",
+    "qrcode": "^1.5.4",
+    "qrcode-reader": "^1.0.4",
+    "qrcode-terminal": "^0.12.0"
   }
 }
