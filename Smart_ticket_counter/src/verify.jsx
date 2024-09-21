@@ -24,7 +24,7 @@ const Verify = () => {
         }
     },[])
 
-    const Toapi=async(hashedId)=>{
+    const Toapi=async(hashedId)=>{ 
         try{
             const response = await fetch('http://localhost:5000/verify', {
                 method: 'POST',
