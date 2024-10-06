@@ -55,13 +55,6 @@ const Ticket = mongoose.model('Ticket', ticketSchema);
 const Stop = mongoose.model('stops', stopSchema);
 const BusData = mongoose.model('BusData', busDataSchema);
 
-function swap(str) {
-    let arr = str.split('');
-        for (let i = 0; i < arr.length - 1; i += 2) {
-        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-    }    
-    return arr.join('');
-}
 // Adding ticket
 app.post("/counter", async (req, res) => {
     try {
@@ -70,8 +63,8 @@ app.post("/counter", async (req, res) => {
         const savedTicket = await ticket.save();
         // res.send({ id: savedTicket._id });
         console.log()
-        const hashedDetails = crypto.createHash('sha256').update(swap(savedTicket._id.toString())).digest('hex');
-        QRCode.toDataURL(hashedDetails, { errorCorrectionLevel: 'H' }, (err, url) => {
+        const base64Details = Buffer.from(savedTicket._id.toString()).toString('base64');
+        QRCode.toDataURL(base64Details, { errorCorrectionLevel: 'H' }, (err, url) => {
             if (err) {
                 console.log(err);
                 return res.status(500).send("Error generating QR code");
@@ -91,7 +84,7 @@ app.post("/verify", async (req, res) => {
         const { hashedId } = req.body;
         const tickets = await Ticket.find();
         const matchedTicket = tickets.find(ticket => {
-            const ticketHash = crypto.createHash('sha256').update(swap(ticket._id.toString())).digest('hex');
+        const ticketHash = Buffer.from(ticket._id.toString()).toString('base64')
             return ticketHash === hashedId;
         });
         if (!matchedTicket) {
