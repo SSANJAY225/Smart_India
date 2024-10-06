@@ -49,7 +49,7 @@ const Counters = () => {
     const handlebook = async (e) => {
         
         try {
-            const response = await axios.post(" http://localhost:5000/counter", { source, destination, email, routeno });
+            const response = await axios.post(" https://smart-india.onrender.com/counter", { source, destination, email, routeno });
             const {qrCode}=response.data
             navigate("/ticketbooked",{state:{qrCode}});
 

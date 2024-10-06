@@ -26,7 +26,7 @@ const Verify = () => {
 
     const Toapi=async(hashedId)=>{ 
         try{
-            const response = await fetch('http://localhost:5000/verify', {
+            const response = await fetch('https://smart-india.onrender.com/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
